@@ -22,7 +22,6 @@ using RestSharp.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Cache;
 using System.Net.Security;
 using System.Reflection;
@@ -32,6 +31,7 @@ using System.Text.RegularExpressions;
 using RestSharp.Serialization;
 using RestSharp.Serialization.Json;
 using RestSharp.Serialization.Xml;
+using RestSharp.Corefx;
 
 namespace RestSharp
 {
@@ -155,7 +155,7 @@ namespace RestSharp
         ///     Proxy to use for requests made by this client instance.
         ///     Passed on to underlying WebRequest if set.
         /// </summary>
-        public IWebProxy Proxy { get; set; }
+        public System.Net.IWebProxy Proxy { get; set; }
 
         /// <summary>
         ///     The cache policy to use for requests initiated by this client instance.
@@ -173,7 +173,7 @@ namespace RestSharp
         /// <summary>
         ///     The CookieContainer used for requests made by this client instance
         /// </summary>
-        public CookieContainer CookieContainer { get; set; }
+        public System.Net.CookieContainer CookieContainer { get; set; }
 
         /// <summary>
         ///     UserAgent to use for requests made by this client instance
@@ -636,10 +636,10 @@ namespace RestSharp
 
             http.AllowedDecompressionMethods = request.AllowedDecompressionMethods;
 
-            var proxy = Proxy ?? WebRequest.DefaultWebProxy;
+            var proxy = Proxy ?? System.Net.WebRequest.DefaultWebProxy;
             try
             {
-                proxy??=WebRequest.GetSystemWebProxy();
+                proxy??= System.Net.WebRequest.GetSystemWebProxy();
             }
             catch (PlatformNotSupportedException)
             {

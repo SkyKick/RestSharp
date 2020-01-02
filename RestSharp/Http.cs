@@ -20,12 +20,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Cache;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
+using RestSharp.Corefx;
 using RestSharp.Extensions;
 
 namespace RestSharp
@@ -101,12 +101,12 @@ namespace RestSharp
         /// <summary>
         ///     System.Net.ICredentials to be sent with request
         /// </summary>
-        public ICredentials Credentials { get; set; }
+        public System.Net.ICredentials Credentials { get; set; }
 
         /// <summary>
         ///     The System.Net.CookieContainer to be used for the request
         /// </summary>
-        public CookieContainer CookieContainer { get; set; }
+        public System.Net.CookieContainer CookieContainer { get; set; }
 
         /// <summary>
         ///     The delegate to use to write the response instead of reading into RawBytes
@@ -204,7 +204,7 @@ namespace RestSharp
         /// <summary>
         /// List of Allowed Decompression Methods
         /// </summary>
-        public IList<DecompressionMethods> AllowedDecompressionMethods { get; set; }
+        public IList<System.Net.DecompressionMethods> AllowedDecompressionMethods { get; set; }
 
         /// <summary>
         ///     Flag to send authorisation header with the HttpWebRequest
@@ -219,7 +219,7 @@ namespace RestSharp
         /// <summary>
         ///     Proxy info to be sent with request
         /// </summary>
-        public IWebProxy Proxy { get; set; }
+        public System.Net.IWebProxy Proxy { get; set; }
 
         /// <summary>
         ///     Caching policy for requests created with this wrapper.
@@ -237,7 +237,7 @@ namespace RestSharp
         /// <returns></returns>
         public static IHttp Create() => new Http();
 
-        protected virtual HttpWebRequest CreateWebRequest(Uri url) => (HttpWebRequest) WebRequest.Create(url);
+        protected virtual HttpWebRequest CreateWebRequest(Uri url) => new HttpWebRequest(url);
 
         public Action<HttpWebRequest> WebRequestConfigurator { get; set; }
 
@@ -296,11 +296,11 @@ namespace RestSharp
 
         private void AppendCookies(HttpWebRequest webRequest)
         {
-            webRequest.CookieContainer = CookieContainer ?? new CookieContainer();
+            webRequest.CookieContainer = CookieContainer ?? new System.Net.CookieContainer();
 
             foreach (var httpCookie in Cookies)
             {
-                var cookie = new Cookie
+                var cookie = new System.Net.Cookie
                 {
                     Name = httpCookie.Name,
                     Value = httpCookie.Value,
@@ -311,7 +311,7 @@ namespace RestSharp
             }
         }
 
-        private void PreparePostBody(WebRequest webRequest)
+        private void PreparePostBody(System.Net.WebRequest webRequest)
         {
             bool needsContentType = string.IsNullOrEmpty(webRequest.ContentType);
 
@@ -379,7 +379,7 @@ namespace RestSharp
             };
             
             if (webResponse.Cookies != null)
-                foreach (Cookie cookie in webResponse.Cookies)
+                foreach (System.Net.Cookie cookie in webResponse.Cookies)
                     response.Cookies.Add(new HttpCookie
                     {
                         Comment = cookie.Comment,

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../netfx.props" />
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <PackageReleaseNotes>For full release notes see https://github.com/restsharp/RestSharp/blob/master/releasenotes.md</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/restsharp/RestSharp/master/restsharp.png</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/restsharp/RestSharp/blob/master/LICENSE.txt</PackageLicenseUrl>
@@ -11,7 +11,7 @@
     <Description>Simple REST and HTTP API Client</Description>
     <Authors>John Sheehan, RestSharp Community</Authors>
     <Version>106.8.10</Version>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <AssemblyOriginatorKeyFile>..\RestSharp.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
@@ -23,10 +23,6 @@
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net452'" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />

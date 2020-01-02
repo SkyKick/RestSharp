@@ -21,7 +21,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text.RegularExpressions;
 using RestSharp.Extensions;
 using RestSharp.Serialization.Json;
@@ -40,7 +39,7 @@ namespace RestSharp
         /// <summary>
         ///     Local list of Allowed Decompression Methods
         /// </summary>
-        readonly IList<DecompressionMethods> _allowedDecompressionMethods;
+        readonly IList<System.Net.DecompressionMethods> _allowedDecompressionMethods;
 
         Action<Stream> _responseWriter;
         Action<Stream, IHttpResponse> _advancedResponseWriter;
@@ -54,7 +53,7 @@ namespace RestSharp
             Method                       = Method.GET;
             Parameters                   = new List<Parameter>();
             Files                        = new List<FileParameter>();
-            _allowedDecompressionMethods = new List<DecompressionMethods>();
+            _allowedDecompressionMethods = new List<System.Net.DecompressionMethods>();
 
             OnBeforeDeserialization = r => { };
         }
@@ -125,10 +124,10 @@ namespace RestSharp
         /// <summary>
         ///     List of Allowed Decompresison Methods
         /// </summary>
-        public IList<DecompressionMethods> AllowedDecompressionMethods =>
+        public IList<System.Net.DecompressionMethods> AllowedDecompressionMethods =>
             _allowedDecompressionMethods.Any()
                 ? _allowedDecompressionMethods
-                : new[] {DecompressionMethods.None, DecompressionMethods.Deflate, DecompressionMethods.GZip};
+                : new[] { System.Net.DecompressionMethods.None, System.Net.DecompressionMethods.Deflate, System.Net.DecompressionMethods.GZip};
 
         /// <summary>
         ///     Always send a multipart/form-data request - even when no Files are present.
@@ -596,7 +595,7 @@ namespace RestSharp
         /// </summary>
         /// <param name="decompressionMethod">None | GZip | Deflate</param>
         /// <returns></returns>
-        public IRestRequest AddDecompressionMethod(DecompressionMethods decompressionMethod)
+        public IRestRequest AddDecompressionMethod(System.Net.DecompressionMethods decompressionMethod)
         {
             if (!_allowedDecompressionMethods.Contains(decompressionMethod))
                 _allowedDecompressionMethods.Add(decompressionMethod);
@@ -669,7 +668,7 @@ namespace RestSharp
         /// <summary>
         ///     In general you would not need to set this directly. Used by the NtlmAuthenticator.
         /// </summary>
-        public ICredentials Credentials { get; set; }
+        public System.Net.ICredentials Credentials { get; set; }
 
         /// <summary>
         ///     Timeout in milliseconds to be used for the request. This timeout value overrides a timeout set on the RestClient.

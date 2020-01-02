@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using RestSharp.Serialization.Xml;
 using RestSharp.Serializers;
 
@@ -110,7 +109,7 @@ namespace RestSharp
         /// <summary>
         /// In general you would not need to set this directly. Used by the NtlmAuthenticator. 
         /// </summary>
-        ICredentials Credentials { get; set; }
+        System.Net.ICredentials Credentials { get; set; }
 
         /// <summary>
         /// Timeout in milliseconds to be used for the request. This timeout value overrides a timeout set on the RestClient.
@@ -140,7 +139,7 @@ namespace RestSharp
         /// <summary>
         /// List of Allowed Decompression Methods
         /// </summary>
-        IList<DecompressionMethods> AllowedDecompressionMethods { get; }
+        IList<System.Net.DecompressionMethods> AllowedDecompressionMethods { get; }
 
         /// <summary>
         /// Adds a file to the Files collection to be included with a POST or PUT request 
@@ -378,7 +377,7 @@ namespace RestSharp
         /// <returns></returns>
         IRestRequest AddQueryParameter(string name, string value, bool encode);
 
-        IRestRequest AddDecompressionMethod(DecompressionMethods decompressionMethod);
+        IRestRequest AddDecompressionMethod(System.Net.DecompressionMethods decompressionMethod);
 
         Action<IRestResponse> OnBeforeDeserialization { get; set; }
 

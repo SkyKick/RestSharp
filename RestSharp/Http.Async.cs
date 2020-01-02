@@ -18,9 +18,9 @@
 
 using System;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using RestSharp.Corefx;
 using RestSharp.Extensions;
 
 namespace RestSharp
@@ -106,7 +106,7 @@ namespace RestSharp
         {
             var response = new HttpResponse();
 
-            if (ex is WebException webException && webException.Status == WebExceptionStatus.RequestCanceled)
+            if (ex is System.Net.WebException webException && webException.Status == System.Net.WebExceptionStatus.RequestCanceled)
             {
                 response.ResponseStatus = timeoutState.TimedOut
                     ? ResponseStatus.TimedOut
@@ -255,9 +255,9 @@ namespace RestSharp
 
                 raw = webRequest.EndGetResponse(result) as HttpWebResponse;
             }
-            catch (WebException ex)
+            catch (System.Net.WebException ex)
             {
-                if (ex.Status == WebExceptionStatus.RequestCanceled)
+                if (ex.Status == System.Net.WebExceptionStatus.RequestCanceled)
                     throw;
 
                 // Check to see if this is an HTTP error or a transport error.

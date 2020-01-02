@@ -17,7 +17,6 @@
 #endregion
 
 using System;
-using System.Net;
 using System.Collections.Generic;
 using System.Text;
 using RestSharp.Authenticators;
@@ -28,6 +27,7 @@ using System.Net.Cache;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 using RestSharp.Serialization;
+using RestSharp.Corefx;
 
 namespace RestSharp
 {
@@ -36,7 +36,7 @@ namespace RestSharp
         [Obsolete("Use the overload that accepts the delegate factory")]
         IRestClient UseSerializer(IRestSerializer serializer);
 
-        CookieContainer CookieContainer { get; set; }
+        System.Net.CookieContainer CookieContainer { get; set; }
 
         bool AutomaticDecompression { get; set; }
 
@@ -123,7 +123,7 @@ namespace RestSharp
         /// </summary>
         X509CertificateCollection ClientCertificates { get; set; }
 
-        IWebProxy Proxy { get; set; }
+        System.Net.IWebProxy Proxy { get; set; }
 
         RequestCachePolicy CachePolicy { get; set; }
 

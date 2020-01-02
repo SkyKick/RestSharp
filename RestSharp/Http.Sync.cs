@@ -18,7 +18,7 @@
 
 using System;
 using System.Globalization;
-using System.Net;
+using RestSharp.Corefx;
 using RestSharp.Extensions;
 using RestSharp.Authenticators.OAuth.Extensions;
 
@@ -125,7 +125,7 @@ namespace RestSharp
         private static HttpResponse ExtractErrorResponse(Exception ex)
         {
             var response = new HttpResponse {ErrorMessage = ex.Message};
-            if (ex is WebException webException && webException.Status == WebExceptionStatus.Timeout)
+            if (ex is System.Net.WebException webException && webException.Status == System.Net.WebExceptionStatus.Timeout)
             {
                 response.ResponseStatus = ResponseStatus.TimedOut;
                 response.ErrorException = webException;
@@ -158,7 +158,7 @@ namespace RestSharp
             {
                 return (HttpWebResponse) request.GetResponse();
             }
-            catch (WebException ex)
+            catch (System.Net.WebException ex)
             {
                 // Check to see if this is an HTTP error or a transport error.
                 // In cases where an HTTP error occurs ( status code >= 400 )
@@ -236,7 +236,7 @@ namespace RestSharp
             if (AutomaticDecompression)
             {
                 webRequest.AutomaticDecompression =
-                    DecompressionMethods.Deflate | DecompressionMethods.GZip | DecompressionMethods.None;
+                    System.Net.DecompressionMethods.Deflate | System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.None;
             }
 
             if (Timeout != 0)

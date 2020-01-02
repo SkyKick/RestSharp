@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using RestSharp.Extensions;
 
 namespace RestSharp
@@ -78,7 +77,7 @@ namespace RestSharp
         /// <summary>
         ///     HTTP response status code
         /// </summary>
-        public HttpStatusCode StatusCode { get; set; }
+        public System.Net.HttpStatusCode StatusCode { get; set; }
 
         /// <summary>
         ///     Whether or not the response status code indicates success

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../netfx.props" />
   <PropertyGroup>
-    <TargetFrameworks>net452;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <AssemblyOriginatorKeyFile>..\RestSharp.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
@@ -14,10 +14,10 @@
     <PackageReference Include="Shouldly" Version="3.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RestSharp\RestSharp.csproj" />
+    <Compile Remove="NuSpecUpdateTask.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="NuSpecUpdateTask.cs" />
+    <ProjectReference Include="..\RestSharp\RestSharp.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="SampleData\header_and_rows.xml">

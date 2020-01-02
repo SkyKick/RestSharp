@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 using RestSharp.Extensions;
 
 namespace RestSharp
@@ -9,8 +8,8 @@ namespace RestSharp
     {
         readonly List<Action<IRestResponse<TResponse>>> _changeResponse = new List<Action<IRestResponse<TResponse>>>();
 
-        readonly Dictionary<HttpStatusCode, Func<TResponse>> _customResponses =
-            new Dictionary<HttpStatusCode, Func<TResponse>>();
+        readonly Dictionary<System.Net.HttpStatusCode, Func<TResponse>> _customResponses =
+            new Dictionary<System.Net.HttpStatusCode, Func<TResponse>>();
 
         public JsonRequest(string resource, TRequest request) : base(resource)
         {
@@ -18,11 +17,11 @@ namespace RestSharp
             _changeResponse.Add(ApplyCustomResponse);
         }
 
-        public JsonRequest<TRequest, TResponse> ResponseForStatusCode(HttpStatusCode statusCode, TResponse response)
+        public JsonRequest<TRequest, TResponse> ResponseForStatusCode(System.Net.HttpStatusCode statusCode, TResponse response)
             => this.With(x => _customResponses.Add(statusCode, () => response));
 
         public JsonRequest<TRequest, TResponse> ResponseForStatusCode(
-            HttpStatusCode statusCode, Func<TResponse> getResponse
+            System.Net.HttpStatusCode statusCode, Func<TResponse> getResponse
         )
             => this.With(x => _customResponses.Add(statusCode, getResponse));
 
