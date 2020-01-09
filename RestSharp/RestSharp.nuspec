@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>SkyKick.RestSharp</id>
-    <version>106.6.10-skykick.2</version>
+    <version>106.6.10-skykick.3</version>
     <authors>John Sheehan, RestSharp Community, SkyKick</authors>
     <owners>John Sheehan, RestSharp Community</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
