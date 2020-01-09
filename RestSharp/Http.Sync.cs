@@ -212,7 +212,8 @@ namespace RestSharp
             }
 
             AppendHeaders(webRequest);
-            AppendCookies(webRequest);
+            if (CookieContainer?.Count > 0)
+                AppendCookies(webRequest);
 
             if (Host != null) webRequest.Host = Host;
 
