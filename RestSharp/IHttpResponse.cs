@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 
 namespace RestSharp
 {
@@ -32,7 +31,7 @@ namespace RestSharp
         /// <summary>
         /// HTTP response status code
         /// </summary>
-        HttpStatusCode StatusCode { get; set; }
+        System.Net.HttpStatusCode StatusCode { get; set; }
 
         /// <summary>
         /// Description of HTTP status returned

@@ -17,9 +17,10 @@
 #endregion
 
 using System;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using RestSharp.Corefx;
+using RestSharp.Validation;
 
 namespace RestSharp
 {

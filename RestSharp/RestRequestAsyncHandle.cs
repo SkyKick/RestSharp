@@ -1,4 +1,5 @@
-using System.Net;
+
+using RestSharp.Corefx;
 
 namespace RestSharp
 {

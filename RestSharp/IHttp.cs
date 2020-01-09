@@ -19,8 +19,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Text;
+using RestSharp.Corefx;
 
 using System.Net.Cache;
 using System.Net.Security;
@@ -34,9 +34,9 @@ namespace RestSharp
         
         Action<Stream, IHttpResponse> AdvancedResponseWriter { get; set; }
 
-        CookieContainer CookieContainer { get; set; }
+        System.Net.CookieContainer CookieContainer { get; set; }
 
-        ICredentials Credentials { get; set; }
+        System.Net.ICredentials Credentials { get; set; }
 
         /// <summary>
         /// Enable or disable automatic gzip/deflate decompression
@@ -95,7 +95,7 @@ namespace RestSharp
 
         string Host { get; set; }
 
-        IList<DecompressionMethods> AllowedDecompressionMethods { get; set; }
+        IList<System.Net.DecompressionMethods> AllowedDecompressionMethods { get; set; }
             
         HttpWebRequest DeleteAsync(Action<HttpResponse> action);
 
@@ -137,7 +137,7 @@ namespace RestSharp
 
         HttpResponse AsGet(string httpMethod);
 
-        IWebProxy Proxy { get; set; }
+        System.Net.IWebProxy Proxy { get; set; }
         
         RemoteCertificateValidationCallback RemoteCertificateValidationCallback { get; set; }
         

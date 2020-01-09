@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using RestSharp.Serialization;
@@ -377,7 +376,7 @@ namespace RestSharp
             switch (response.ResponseStatus)
             {
                 case ResponseStatus.Aborted:
-                    exception = new WebException("Request aborted");
+                    exception = new System.Net.WebException("Request aborted");
                     break;
                 case ResponseStatus.Error:
                     exception = response.ErrorException;
